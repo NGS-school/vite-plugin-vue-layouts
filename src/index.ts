@@ -64,18 +64,18 @@ export default function Layout(userOptions: UserOptions = {}): Plugin {
       layoutDirs = resolveDirs(options.layoutsDirs, config.root)
       pagesDirs = resolveDirs(options.pagesDirs, config.root)
     },
-    configureServer({ moduleGraph, watcher, ws }) {
+    configureServer({ moduleGraph, watcher }) {
       watcher.add(options.layoutsDirs)
 
-      const reloadModule = (module: ModuleNode | undefined, path = '*') => {
+      const reloadModule = (module: ModuleNode | undefined) => {
         if (module) {
           moduleGraph.invalidateModule(module)
-          if (ws) {
-            ws.send({
-              path,
-              type: 'full-reload',
-            })
-          }
+          // if (ws) {
+          //   ws.send({
+          //     path,
+          //     type: 'full-reload',
+          //   })
+          // }
         }
       }
 
